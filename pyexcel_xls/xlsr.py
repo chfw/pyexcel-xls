@@ -137,6 +137,7 @@ class XLSReader(IReader):
         )
         self.__detect_merged_cells = keywords.get("detect_merged_cells", False)
         self._keywords = keywords
+        self._date_mode = self._keywords.pop("date_mode", None)
         xlrd_params = self._extract_xlrd_params()
         if self.__skip_hidden_row_column and file_type == "xls":
             xlrd_params["formatting_info"] = True
@@ -152,9 +153,12 @@ class XLSReader(IReader):
 
     def read_sheet(self, index):
         native_sheet = self.content_array[index]
-        sheet = XLSheet(
-            native_sheet, date_mode=self.xls_book.datemode, **self._keywords
+        date_mode = (
+            self.xls_book.datemode
+            if self._date_mode is None
+            else self._date_mode
         )
+        sheet = XLSheet(native_sheet, date_mode=date_mode, **self._keywords)
         return sheet
 
     def close(self):

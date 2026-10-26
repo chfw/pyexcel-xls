@@ -8,6 +8,9 @@ releases:
   - action: Updated
     details:
     - "`#54`: first project in pyexcel to migrate to pytest"
+  - action: Fixed
+    details:
+    - "`#56`: allow date_mode to override the workbook date system without duplicate arguments"
   date: 07.03.2024
   version: 0.7.1
 - changes:

@@ -60,6 +60,17 @@ and columns and is defaulted to **True**. It may slow down its reading
 performance. And it is only valid for 'xls' files. For 'xlsx' files,
 please use pyexcel-xlsx.
 
+Date-system override
+====================
+
+By default, dates use the workbook's stored date system. If a workbook has an
+incorrect date-system flag, pass ``date_mode=0`` for the 1900 system or
+``date_mode=1`` for the 1904 system when reading it. This changes how date serials
+are interpreted; it does not change the workbook. ``date_mode=None`` retains the
+workbook's date system. For example::
+
+    data = get_data("dates.xls", date_mode=1)
+
 Warning
 ================================================================================
 
